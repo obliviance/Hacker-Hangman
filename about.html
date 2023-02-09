@@ -1,0 +1,132 @@
+<!-- 
+  Awwab Mahdi
+  April 18th, 2019
+  Prepared for: Ms. Kutschke  
+-->
+<!--
+  Purpose:
+  A Hangman game with a "help" page to explain the playing mechanics of the game, an "about" page to explain the overall story, and the Hangman page, where you can play the actual game. The game allows the player to enter a username, choose a word category, and then play a virtual version of Hangman through the use of buttons and Javascript(and HTML & CSS). The game keeps track of a single player's wins and losses and offers them the ability to play again.
+-->
+<!--
+  This page is the about page, which shows the actual story of the game, along with helpful links to the game and help page, as well as the constant overhead navbar for navigation.
+-->
+<html>
+
+<head>
+	<title>About - Hangman</title>
+  <style>
+    /* THE MAIN CSS */
+    /* Giving the containing div some CSS styling */
+    #splashcontainer {
+      display: block;
+      margin: 0 auto;
+      border: 3px solid dodgerblue;
+      border-radius: 10px;
+      width: 55%;
+      background-color: lightskyblue;
+      box-shadow: 20px 20px 15px skyblue;
+      margin-top: 25px;
+    }
+
+    /* Giving the body a faint background-color */
+    body {
+      background-color: aliceblue;
+    }
+
+    /* CSS styling for h1 elements (used as body text, mainly simple styling) */
+    h1 {
+      font-size: 20px;
+      text-align: center;
+      font-family: "Trebuchet MS";
+      margin: 20px;
+    }
+
+    /* CSS styling for the buttons (Giving them some size, colour, and alignment) */
+    button {
+      display: block;
+      width: 50%;
+      margin: 0 auto;
+      padding: 20px;
+      font-size: 30px;
+      border-radius: 20px;
+      font-family: "Trebuchet MS";
+      margin-bottom: 20px;
+      font-weight: bold;
+      background: #1d92d2; 
+      border: 2px solid #1d92d2;
+      transition: ease all 0.5s;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* CSS styling for the buttons on hover (changing colour and font-colour) */
+    button:hover {
+      background: lightskyblue;
+      color: black;
+    }
+
+    /* CSS styling for the span elements (giving them bigger font-size and bold) */
+    span {
+      font-size: 27px;
+      font-weight: bold;
+    }
+
+    /* CSS styling for the navbar div (aligning the div and its childs) */
+    #navbar {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 27%; 
+      padding-left: 27%;
+    }
+
+    /* CSS styling for the navbar's links (making them simple black words that are properly aligned) */
+    .navlink {
+      display: block;
+      color: black;
+      font-size: 40px;
+      font-weight: bold;
+      border: 2px solid black;
+      font-family: "Trebuchet MS";
+      text-align: center;
+      padding: 5px;
+      margin: 20px;
+      transition: ease all 0.5s;
+      text-decoration: none;
+    }
+
+    /* CSS styling for the navbar's links on hover (just colour changes) */
+    .navlink:hover {
+      color: aliceblue;
+      background-color: black;
+    }
+
+    /* CSS for the page title (giving it some extra attributes [bold, size] to make it look special) */
+    #titlemain {
+      font-weight: none;
+      font-size: 27px;
+    }
+  </style>
+</head>
+
+<!-- THE MAIN HTML -->
+<body>
+  <!-- The site's navbar -->
+  <div id="navbar">
+    <a href="help.html" class="navlink">Help</a>
+    <a href="index.html" class="navlink">Hangman</a>
+    <a href="about.html" class="navlink">About</a>
+  </div>
+  <!-- The site's containing div -->
+	<div id="splashcontainer">
+    <h1 id="titlemain">STORY</h1>
+    <!-- The body text of the box -->
+		<h1>You are a hacker working for <span>Anonymous</span>. <br>You are trying to break into <span>Google</span>, because apparently<br> they are selling our information to alien beings from Uranus<br> who want to create better ads. You have rerouted your IP adress to <br><span>7</span> locations, but Google is tracking you and <br><span>every incorrect password guess</span><br> gets them one location closer.</h1>
+    <!-- Button to go to the game -->
+    <button onclick="window.location.href = 'index.html';" id="playbtn">PLAY</button>
+		<h1>For a reminder of the rules of Hangman-er-hacking, <br><span>click below.</span></h1>
+    <!-- Button to go to the help page -->
+    <button onclick="window.location.href = 'help.html';" id="helpbtn">Hacking Help</button>
+	</div>
+</body>
+
+</html>

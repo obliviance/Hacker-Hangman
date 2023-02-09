@@ -1,0 +1,136 @@
+<!-- 
+  Awwab Mahdi
+  April 18th, 2019
+  Prepared for: Ms. Kutschke  
+-->
+<!--
+  Purpose:
+  A Hangman game with a "help" page to explain the playing mechanics of the game, an "about" page to explain the overall story, and the Hangman page, where you can play the actual game. The game allows the player to enter a username, choose a word category, and then play a virtual version of Hangman through the use of buttons and Javascript(and HTML & CSS). The game keeps track of a single player's wins and losses and offers them the ability to play again.
+-->
+<!--
+  This page is the help page, which displays the instructions for the game, and also contains links to the game and the about page. It also has the constant overhead navbar for navigation.
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Help - Hangman</title>
+	<style>
+    /* THE MAIN CSS */
+    body {
+      background-color: aliceblue;
+    }
+
+    /* CSS for my navbar links */
+    .navlink {
+      display: block;
+      color: black;
+      font-size: 40px;
+      font-weight: bold;
+      border: 2px solid black;
+      font-family: "Trebuchet MS";
+      text-align: center;
+      padding: 5px;
+      margin: 20px;
+      transition: ease all 0.5s;
+      text-decoration: none;
+    }
+
+    /* Simple color changing hover effects */
+    .navlink:hover {
+      color: aliceblue;
+      background-color: black;
+    }
+
+    #navbar {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 27%; 
+      padding-left: 27%;
+    }
+
+    p {
+      font-size: 20px;
+      text-align: center;
+      font-family: "Trebuchet MS";
+      margin: 20px;
+    }
+
+    /* CSS for the large containing div */
+    #helpcontainer {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+      border: 3px solid dodgerblue;
+      border-radius: 10px;
+      width: 55%;
+      background-color: lightskyblue;
+      box-shadow: 20px 20px 15px skyblue;
+      margin-top: 25px;
+      padding: 10px;
+    }
+
+    /* CSS for the buttons */
+    button {
+      display: block;
+      width: 50%;
+      margin: 0 auto;
+      padding: 20px;
+      font-size: 30px;
+      border-radius: 20px;
+      font-family: "Trebuchet MS";
+      margin-bottom: 20px;
+      font-weight: bold;
+      background: #1d92d2; 
+      border: 2px solid #1d92d2;
+      transition: ease all 0.5s;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Colour-changing CSS hover effects for the buttons */
+    button:hover {
+      background: lightskyblue;
+      color: black;
+    }
+
+    span {
+      font-size: 27px;
+      font-weight: bold;
+      text-align: center;
+      font-family: "Trebuchet MS";
+      text-align: center;
+    }
+
+    body {
+      background-color: aliceblue;
+    }
+	</style>
+</head>
+
+<body>
+  <!-- THE MAIN HTML (the box) -->
+  <!-- The site's navbar -->
+  <div id="navbar">
+    <a href="help.html" class="navlink">Help</a>
+    <a href="index.html" class="navlink">Hangman</a>
+    <a href="about.html" class="navlink">About</a>
+  </div>
+  <!-- The site's containing div -->
+  <div id="helpcontainer">
+    <span>HOW TO PLAY</span>
+    <!-- Body text -->
+    <p>To play <span>Hacker Hangman</span>, first you must create a username for your session.</p>
+    <p>Next, choose a category for the words you want to guess.</p>
+    <p>Now, the gameplay screen will have appeared. To play the game, you guess which letters are in the hidden word by clicking them, until the whole word/sentence has been completely guessed. But be careful: if you guess more than <span>7</span> times, you will get caught!</p>
+    <!-- Button leading to the game page -->
+    <button onclick="window.location.href = 'index.html';" id="playbtn">PLAY</button>
+		<p>For some of the story to the game,<br><span>click below.</span></p>
+    <!-- Button leading to the about page -->
+    <button onclick="window.location.href = 'about.html';" id="helpbtn">Story</button>
+  </div>
+</body>
+
+</html>

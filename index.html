@@ -1,0 +1,506 @@
+<!-- 
+  Awwab Mahdi
+  April 18th, 2019
+  Prepared for: Ms. Kutschke  
+-->
+<!--
+  Purpose:
+  A Hangman game with a "help" page to explain the playing mechanics of the game, an "about" page to explain the overall story, and the Hangman page, where you can play the actual game. The game allows the player to enter a username, choose a word category, and then play a virtual version of Hangman through the use of buttons and Javascript(and HTML & CSS). The game keeps track of a single player's wins and losses and offers them the ability to play again.
+-->
+<!--
+  This page is the main page, which contains the username input area, the category choosing area, and the game iteslf. it also has a convenient overhead navbar which can be used to navigate between pages.
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Welcome to Hangman</title>
+	<style>
+    /* THE MAIN CSS */
+    /* Colouring the body and establishing a basic font size and font-family */
+    body {
+			font-family: "Trebuchet MS";
+			font-size: 20px;
+      background-color: aliceblue;
+		}
+
+    /* CSS for the first "page view" of the Hangman game: the username page. */
+    #welcomecontainer {
+      margin-top: 150px;
+      margin-bottom: 150px;
+      text-align: center;
+      display: block;
+      overflow: hidden;
+    }
+
+    #welcomemsg {
+      font-family: "Trebuchet MS";
+      font-size: 50px;
+      text-align: center;
+    }
+
+    #username {
+      display: block;
+      font-size: 40px;
+      font-family: "Trebuchet MS";
+      text-align: center;
+      margin: 0 auto;
+      width: 25%;
+      border-style: none;
+      border: 2px solid dodgerblue;
+      border-radius: 20px;
+    }
+
+    #submitbtn {
+      width: 150px;
+      height: 50px;
+      font-size: 30px;
+      border: 2px solid dodgerblue;
+      background-color: dodgerblue;
+      border-radius: 15px;
+      font-weight: bold;
+      transition: ease all 0.5s;
+      margin: 50px;
+    }
+
+    #submitbtn:hover {
+      background-color: lightskyblue;
+    }
+    /* Username "page view" CSS end */
+
+    /* CSS for the second page view: the category choosing section */
+    /* General CSS for each button */
+    .categories {
+      width: 210px;
+      height: 70px;
+      font-size: 50px;
+      border: 2px solid dodgerblue;
+      background-color: dodgerblue;
+      border-radius: 15px;
+      font-weight: bold;
+      transition: ease all 0.5s;
+      margin: 50px;
+    }
+
+    .categories:hover {
+      background-color: lightskyblue;
+    }
+
+    /* CSS specifically for the Math Puns button */
+    #mathbtn {
+      font-size: 40px;
+    }
+
+    /* CSS for the text on the page view */
+    #categorytxt {
+      font-family: "Trebuchet MS";
+      font-size: 50px;
+      text-align: center;
+    }
+
+    /* CSS for the page view container, enabling view on or off */
+    #categoriesctn {
+      display: none;
+      overflow: hidden;
+      text-align: center;
+      margin-top: 170px;
+    }
+    /* End of category view CSS */
+
+    /* CSS for the main page view: the actual game */
+    /* CSS for partial table align */
+    table {
+      display: in-line;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Basic button CSS */
+		button {
+			width: 100px;
+			height: 100px;
+			font-family: "Trebuchet MS";
+			font-size: 37px;
+			border-radius: 20px;
+			background-color: whitesmoke;
+			border: 2px solid dodgerblue;
+			margin: 5px;
+		}
+
+    /* CSS for the image */
+    #mainpic {
+      display: block;
+      text-align: center;
+      border: 3px solid dodgerblue;
+      border-radius: 30px;
+      margin: 20px;
+      margin-bottom: 150px;
+    }
+
+    /* CSS for centering all words in class */
+    .centerword {
+      display: block;
+      text-align: center; 
+    }
+
+    /* CSS for the dashedword */
+    #dashedword {
+      font-size: 70px;
+    }
+
+    /* CSS for the div containing the letter buttons */
+    #btncontainer {
+      display: block;
+      text-align: center
+    }
+
+    /* CSS for the Letters Picked span */
+    #letterpick {
+      display: block;
+      text-align: center;
+    }
+
+    #p1 {
+      display: block;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    /* CSS for the navlinks of the navbar */
+    .navlink {
+      display: block;
+      color: black;
+      font-size: 40px;
+      font-weight: bold;
+      border: 2px solid black;
+      font-family: "Trebuchet MS";
+      text-align: center;
+      padding: 5px;
+      margin: 20px;
+      transition: ease all 0.5s;
+      text-decoration: none;
+    }
+
+    /* CSS for the navlinks of the navbar on hover */
+    .navlink:hover {
+      color: aliceblue;
+      background-color: black;
+    }
+
+    /* Navbar CSS */
+    #navbar {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 27%; 
+      padding-left: 27%;
+    }
+
+    /* CSS for hiding and showing the div containing the content */
+    #content {
+      display: none;
+      overflow: hidden;
+    }
+
+    #unametxt {
+      text-align: center;
+      font-size: 50px;
+      font-family: "Trebuchet MS";
+      font-weight: bold;
+    }
+
+    #guessleft {
+      display: block;
+      text-align: center;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    span {
+      display: block;
+      text-align: center;
+    }
+
+    #gamewin {
+      display: block;
+      text-align: center;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    #gamelose {
+      display: block;
+      text-align: center;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    /* CSS for the Play Again button */
+    #playagain {
+      display: block;
+      margin: 0 auto;
+      width: 90%;
+      height: 15%;
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 50px;
+      margin-top: 50px;
+      transition: ease all 0.5s;
+    }
+
+    #playagain:hover {
+      background-color: royalblue;
+    }
+	</style>
+</head>
+
+<body>
+  <div id="welcomecontainer">
+    <p id="welcomemsg">Welcome to <b>Hacker Hangman.</b><br>Please enter a username:</p>
+    <input type="text" id="username" placeholder="Bob">
+    <br>
+    <button id="submitbtn" onclick="reveal(), myFunction()">SUBMIT</button>
+  </div>
+  <!-- Div containing the categories page view -->
+  <div id="categoriesctn">
+    <p id="categorytxt">Choose your category:</p>
+    <!-- Categories buttons -->
+    <button type="button" class="categories" onclick="setWord(carswords), reveal2()">Cars</button>
+    <button type="button" class="categories" onclick="setWord(foodwords), reveal2()">Food</button>
+    <button type="button" class="categories" onclick="setWord(peoplewords), reveal2()">People</button>
+    <button type="button" class="categories" id="mathbtn" onclick="setWord(punswords), reveal2()">Math Puns</button>
+  </div>
+  <div id="content">
+    <!-- Navbar -->
+  <div id="navbar">
+    <a href="./help.html" class="navlink">Help</a>
+    <a href="./index.html" class="navlink">Hangman</a>
+    <a href="./about.html" class="navlink">About</a>
+  </div>
+  <hr>
+  <!-- Div containing the general game menu-->
+  <div id="gamemenu">
+    <p id="unametxt">Welcome, <span id="inname"></span></p>
+    <table id="tablectn">
+      <tr>
+        <td colspan="2">
+          <!-- Dashedword used to display progress-->
+          <span id="dashedword" class="centerword"></span>
+        </td>
+        <td>
+          <!-- Span used to contain letters that have been picked-->
+          <span id="letterpick">Letters Picked:</span>
+          <span id="p1"></span>
+        </td>
+        <td>
+          <!-- Span used to contain the amount of guesses left-->
+          <span>Guesses Left:</span>
+          <span id="guessleft">7</span>
+        </td>
+        <td>
+          <!-- Span used to contain the total wins and losses -->
+          <span>Wins: <span id="gamewin">0</span> Losses: <span id="gamelose">0</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <!-- Div where the created letter buttons are placed -->
+          <div id="btncontainer"></div>
+        </td>
+        <td colspan="3">
+          <!-- Img tag that contains the Hangman progressions -->
+            <img src="./images/Hangman Images1.jpg" id="mainpic">
+        </td>
+      </tr>
+    </table>
+    <!-- Button that allows play again functionality-->
+    <button id="playagain" onclick="playAgain()">Play Again</button>
+    <script>
+      //Lists with the words available
+      var carswords = ["Ferrari", "Porsche", "Tesla", "Lamborghini", "Corvette", "McLaughlin", "Chrysler", "Volkswagen", "Honda", "Pagani"];
+      var foodwords = ["Butter Chicken", "Sushi", "Garden Salad", "Pizza", "Baguette", "Biryani", "Chow Mein", "Jambalaya", "Mashed Potatoes", "Ice"];
+      var  peoplewords = ["Awwab", "Eshwar", "Andy", "Benjamin Franklin", "Kevin", "Ethan", "Milesh", "Sairah", "Eden", "Shirley"];
+      var punswords = ["Math puns are a sine of wisdom", "Too much Pi can give you a large cicumference", "You have to be odd to be number one", "There is a fine line between a numerator and a denominator", "Geometry keeps you in shape", "Not all math puns are terrible just sum", "Do not be mean be rational", "It is a sine to go off tangent", "Do not drink and derive", "Parallel lines have so much in common it is a shame they never meet"];
+      //Variables
+      var randomWord = "";
+      var dashedWORD = "";
+      var inword = 0;
+      var anyT = document.getElementsByClassName("egg");
+      var totalwins = 0;
+      var totallose = 0;
+
+      //Function that creates a random number between 0 and 10
+      function randomizer () {
+        var rdm = Math.floor(10 * Math.random());
+        return rdm;
+      };
+
+      //Function that uses randomizer() to get a random word in a category and then inserts the dashed word into the dashedword html span
+      function setWord (list1) {
+        randomWord = list1[randomizer()];
+        console.log(randomWord);
+        randomWord = randomWord.toUpperCase()
+        dashedWORD = "";
+        for (i = 0; i < randomWord.length; i++) {
+          if (randomWord[i] == " ") {
+            dashedWORD += " ";
+          } else {
+            dashedWORD += "-";
+          };
+        };
+        document.getElementById("dashedword").innerHTML += dashedWORD;
+      };
+      
+      //Function that hides one page view and reveals another
+      function reveal () {
+        document.getElementById("categoriesctn").style.display = "block";
+        document.getElementById("welcomecontainer").style.display = "none";
+      };
+
+      //Function that hides one page view and reveals another
+      function reveal2 () {
+        document.getElementById("content").style.display = "block";
+        document.getElementById("categoriesctn").style.display = "none";
+      };
+
+      //Function that hides one page view and reveals another
+      function reveal3 () {
+        document.getElementById("categoriesctn").style.display = "block";
+        document.getElementById("content").style.display = "none";
+      };
+
+      //Main function that creates letter buttons, gives them ids/classes and adds event listeners
+      function myFunction () {
+      //For loop that creates 26 buttons and also adds other abilities
+        for (x = 1; x <= 26; x++) {
+	        //Using createElement to create buttons and breaks
+          var btn = document.createElement("BUTTON");
+	        var myP = document.createElement("br");
+	        //Getting letters
+          var letter = String.fromCharCode(x+64);
+          var t = document.createTextNode(letter);
+	        //AAdding t to the button variable
+          btn.appendChild(t);
+	        //Gave the button an id and a class for easy access
+          btn.id = letter;
+          myP.classList.add("breaks");
+          btn.classList.add("egg");
+	        //Adding event listeners to each button
+          btn.addEventListener("click", checkLetter);
+          btn.addEventListener("mouseover", changeColor);
+          btn.addEventListener("mouseout", changeColor2);
+          //Add the button to its container
+	        document.getElementById("btncontainer").appendChild(btn);
+	        //Add a line break to the sixth button
+	        if (x % 6 == 0) {
+	          document.getElementById("btncontainer").appendChild(myP);
+	        };
+        };
+        document.getElementById("inname").innerHTML = document.getElementById("username").value;
+      };
+
+      //Function that restarts the game processes
+      function playAgain () {
+        reveal3();
+        document.getElementById("guessleft").innerHTML = "7";
+        document.getElementById("p1").innerHTML = "";
+        document.getElementById("mainpic").src = "./images/Hangman Images1.jpg";
+        document.getElementById("dashedword").innerHTML = "";
+        inword = 0;
+        guesscount = 0;
+        for (var i = 1; i <= 26; i++) {
+          var newletter = String.fromCharCode(i+64);
+          newletter = newletter.toUpperCase();
+          document.getElementById(newletter).remove();
+        };
+        myFunction();
+      };
+
+      //Function that sets a character at a specific index
+      function setCharAt(str,index,chr) {
+        return str.substr(0,index) + chr + str.substr(index+1, str.length-1);
+      }
+
+      var guesscount = 0
+      //When letter button is clicked
+      //Function that checks if a letter is in a word, replaces it, and sets the appropriate image
+      function checkLetter () {
+	      //this refers to the object that called this function
+        this.innerHTML = "×";
+        this.style.fontWeight = "bold";
+        this.setAttribute("disabled", "");
+	      document.getElementById("p1").innerHTML += this.id;
+        var replaceword;
+        var inword = 0;
+        var z = 0;
+        while (z < randomWord.length) {
+          if (randomWord[z] == this.id) {
+            replaceword = document.getElementById("dashedword").innerHTML;
+            replaceword = setCharAt(replaceword, z, this.id);
+            document.getElementById("dashedword").innerHTML = replaceword;
+            z += 1;
+            inword += 1;
+          } else {
+            z += 1;
+          };
+        };
+        if (inword === 0) {
+          guesscount += 1;
+        };
+        //Setting image
+        if (guesscount == 1) {
+          document.getElementById("mainpic").src = "./images/Hangman Images (1).jpg";
+          document.getElementById("guessleft").innerHTML = "6";
+        } else if (guesscount == 2) {
+          document.getElementById("mainpic").src = "./images/Hangman Images (2).jpg";
+          document.getElementById("guessleft").innerHTML = "5";
+        } else if (guesscount == 3) {
+          document.getElementById("mainpic").src = "./images/Hangman Images (3).jpg";
+          document.getElementById("guessleft").innerHTML = "4";
+        } else if (guesscount == 4) {
+          document.getElementById("mainpic").src = "./images/Hangman Images (4).jpg";
+          document.getElementById("guessleft").innerHTML = "3";
+        } else if (guesscount == 5) {
+          document.getElementById("mainpic").src = "./images/Hangman Images (5).jpg";
+          document.getElementById("guessleft").innerHTML = "2";
+        } else if (guesscount == 6) {
+          document.getElementById("mainpic").src = "./images/Hangman Images (6).jpg";
+          document.getElementById("guessleft").innerHTML = "1";
+        } else if (guesscount == 7) {
+          document.getElementById("mainpic").src = "./images/Hangman Images.jpg";
+          document.getElementById("guessleft").innerHTML = "0";
+          totallose += 1;
+          for (var i = 0; i < anyT.length; i++){
+            anyT[i].disabled = true;
+          };
+        };
+        var completeword = document.getElementById("dashedword").innerHTML;
+        if (completeword.includes("-") == false) {
+          document.getElementById("mainpic").src = "./images/Hangman Images Win.jpg";
+          totalwins += 1;
+          for (var i = 0; i < anyT.length; i++){
+            anyT[i].disabled = true;
+          };
+        };
+
+        document.getElementById("gamewin").innerHTML = totalwins;
+        document.getElementById("gamelose").innerHTML = totallose;
+      };
+
+      //Changing the colour of buttons on hover
+      function changeColor () {
+        this.style.backgroundColor = "royalblue";
+        this.style.transition = "ease 0.5s";
+      };
+
+      //Changing the colour of buttons on mouseout
+      function changeColor2 () {
+        this.style.backgroundColor = "whitesmoke";
+        this.style.transition = "ease 1s";
+      };
+    </script>
+  </div>
+  </div>
+</body>
+</html>
